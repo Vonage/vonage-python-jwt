@@ -1,0 +1,24 @@
+name: Build
+on: [push]
+jobs:
+  test:
+    name: Test
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        python: ["3.7", "3.8", "3.9", "3.10", "3.11"]
+        os: ["ubuntu-latest", "macos-latest"]
+
+    steps:
+      - uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Clone repo
+        uses: actions/checkout@v3
+      - name: Install dependencies
+        run: make install
+      - name: Run tests
+        run: make coverage
+      - name: Run codecov
+        uses: codecov/codecov-action@v1
