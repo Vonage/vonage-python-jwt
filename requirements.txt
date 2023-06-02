@@ -1,0 +1,6 @@
+-e .
+pytest
+coverage
+bump2version
+build
+twine

@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+package_dir = "src"
+
+[project]
+name = "vonage_jwt"
+version = "0.0.1"
+authors = [
+  { name="Vonage Developer Relations", email="devrel@vonage.com" },
+]
+description = "A JWT Generator for Python. Creates JWTs for use with Vonage APIs."
+readme = "README.md"
+dependencies = [
+    "pyjwt[crypto] >=1.6.4"
+]
+requires-python = ">=3.7"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "License :: OSI Approved :: Apache Software License",
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/Vonage/vonage-python-jwt"
+"Bug Tracker" = "https://github.com/Vonage/vonage-python-jwt/issues"
