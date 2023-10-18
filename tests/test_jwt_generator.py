@@ -32,8 +32,6 @@ def test_create_jwt_client_key_string():
 def test_create_jwt_client_key_file():
     jwt_client = JwtClient(application_id, private_key_file_path)
     assert jwt_client._application_id == application_id
-    print(jwt_client._private_key)
-    print(private_key_string)
     assert jwt_client._private_key == bytes(private_key_string, 'utf-8')
 
 
@@ -61,7 +59,6 @@ def test_generate_application_jwt_basic():
 
 def test_generate_application_jwt_custom_claims():
     now = int(time())
-    print(now)
     claims = {'jti': 'qwerasdfzxcv1234', 'nbf': now + 100}
     jwt = jwt_client.generate_application_jwt(claims)
     with raises(ImmatureSignatureError) as err:

@@ -6,7 +6,7 @@ from typing import Union
 
 
 class JwtClient:
-    """Object used to pass in an application ID and private key to the JWT generator."""
+    """Object used to pass in an application ID and private key to generate JWT methods."""
 
     def __init__(self, application_id: str, private_key: str):
         self._application_id = application_id
@@ -17,12 +17,15 @@ class JwtClient:
             raise VonageJwtError(err)
 
         if self._application_id is None or self._private_key is None:
-            raise VonageJwtError('Both of "application_id" and "private_key" are required.')
+            raise VonageJwtError(
+                'Both of "application_id" and "private_key" are required.'
+            )
 
     def generate_application_jwt(self, jwt_options: dict = {}):
-        """Generates a JWT for the specified Vonage application.
-        If values for application_id and private_key are set on the JWTClient object,
-        this method will use them. Otherwise, they can be specified directly.
+        """
+        Generates a JWT for the specified Vonage application.
+        You can override values for application_id and private_key on the JWTClient object by
+        specifying them in the `jwt_options` dict if required.
         """
 
         iat = int(time())
@@ -35,7 +38,7 @@ class JwtClient:
 
         headers = {'alg': 'RS256', 'typ': 'JWT'}
 
-        token = encode(payload, self._private_key, algorithm="RS256", headers=headers)
+        token = encode(payload, self._private_key, algorithm='RS256', headers=headers)
         return bytes(token, 'utf-8')
 
     def _set_private_key(self, key: Union[str, bytes]):
